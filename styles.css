@@ -1,17 +1,27 @@
+.container {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, 200px);
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.flip-card img {
+  height: 200px;
+  width: 200px;
+}
+
 .flip-card {
-  background-color: transparent;
-  width: 300px;
-  height: 300px;
-  border: 1px solid #f1f1f1;
+  width: 200px;
+  height: 200px;
   perspective: 1000px;
+  position: relative;
 }
 
 .flip-card-inner {
-  position: relative;
   width: 100%;
   height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
+  transition: transform 0.9s;
   transform-style: preserve-3d;
 }
 
@@ -24,17 +34,44 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
 .flip-card-front {
-  background-color: #bbb;
-  color: black;
+  background-color: #e7f0ab;
+  border-radius: 15px;
 }
 
 .flip-card-back {
-  background-color: dodgerblue;
-  color: white;
   transform: rotateY(180deg);
+}
+
+.frog1 {
+  background-color: rgb(238, 118, 248);
+  border-radius: 15px;
+}
+
+.frog2 {
+  background-color: rgb(58, 147, 249);
+  border-radius: 15px;
+}
+
+.frog3 {
+  background-color: rgb(242, 186, 73);
+  border-radius: 15px;
+}
+
+.frog4 {
+  background-color: rgb(93, 205, 93);
+  border-radius: 15px;
+}
+
+.frog5 {
+  background-color: rgb(219, 120, 102);
+  border-radius: 15px;
+}
+
+.frog6 {
+  background-color: rgb(149, 102, 219);
+  border-radius: 15px;
 }
