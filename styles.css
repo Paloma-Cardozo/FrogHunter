@@ -5,10 +5,62 @@
 }
 
 body {
-  background: #e0dfefdc;
+  background: #ffffff;
   font-family: "Noto Sans", sans-serif;
   display: flex;
   flex-direction: column;
+}
+
+.title,
+.subtitle {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 35px;
+  color: #127439;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+  font-weight: 400;
+  font-size: 20px;
+  color: #095327;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 40px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background-color: #e1f7b5;
+  color: #84b131;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 600;
+  font-family: "Noto Sans", sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.288);
+}
+
+.button:hover {
+  background-color: #335840;
+}
+
+.state {
+  font-size: 22px;
+  font-weight: 600;
+  color: #095327;
 }
 
 .container {
@@ -81,56 +133,45 @@ body {
   object-fit: cover;
 }
 
-.title,
-.subtitle {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.title {
-  font-weight: 700;
-  font-size: 35px;
-  color: #127439;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.subtitle {
-  font-weight: 400;
-  font-size: 20px;
-  color: #095327;
-}
-
 .frog-icon {
   width: 50px;
   height: 50px;
 }
 
 .frog1 {
-  background-color: rgb(238, 118, 248);
+  background-color: #ee76f8;
   border-radius: 15px;
 }
 
 .frog2 {
-  background-color: rgb(58, 147, 249);
+  background-color: #3a93f9;
   border-radius: 15px;
 }
 
 .frog3 {
-  background-color: rgb(242, 186, 73);
+  background-color: #f2ba49;
   border-radius: 15px;
 }
 
 .frog4 {
-  background-color: rgb(93, 205, 93);
+  background-color: #5dcd5d;
   border-radius: 15px;
 }
 
 .frog5 {
-  background-color: rgb(219, 120, 102);
+  background-color: #db7866;
   border-radius: 15px;
 }
 
 .frog6 {
-  background-color: rgb(149, 102, 219);
+  background-color: #9566db;
   border-radius: 15px;
+}
+
+.winner {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 40px;
+  font-weight: 700;
+  color: #127439;
 }

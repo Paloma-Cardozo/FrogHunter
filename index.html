@@ -25,6 +25,22 @@
 
     <h2 class="subtitle">Can you match all the frogs?</h2>
 
+    <div class="game">
+      <div class="controls">
+        <button class="button">
+          <img
+            src="Images/froggy.png"
+            alt="Happy frog icon"
+            class="frog-icon" />
+          <span class="button-text">Start Game</span>
+        </button>
+
+        <div class="state">
+          <span class="moves">Moves: 0</span>
+          <span class="timer">Time: 0s</span>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <div class="flip-card">
         <div class="flip-card-inner" data-name="frog1">
@@ -175,6 +191,11 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="winner">
+      <img src="Images/frog.gif" alt="Frog animation" class="frog-icon" />
+      You won!
+      <img src="Images/frog.gif" alt="Frog animation" class="frog-icon" />
     </div>
     <script src="script.js"></script>
   </body>
