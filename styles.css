@@ -7,6 +7,8 @@
 body {
   background: #e0dfefdc;
   font-family: "Noto Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
@@ -14,7 +16,7 @@ body {
   gap: 25px;
   grid-template-columns: repeat(3, 200px);
   justify-content: center;
-  margin: 50px;
+  margin: 40px;
 }
 
 .flip-card {
@@ -28,7 +30,7 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 0.9s;
+  transition: transform 1s;
   transform-style: preserve-3d;
   box-shadow:
     0 14px 28px rgba(0, 0, 0, 0.25),
@@ -37,7 +39,11 @@ body {
 }
 
 .flip-card:hover .flip-card-inner:not(.flipped) {
-  transform: scale(1.03);
+  transform: scale(1.05);
+}
+
+.flip-card:active .flip-card-inner:not(.flipped) {
+  transform: scale(0.95);
 }
 
 .flip-card-inner.flipped {
