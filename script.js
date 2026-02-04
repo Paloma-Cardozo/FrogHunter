@@ -1,3 +1,13 @@
+let moveCounter = 0;
+let elapsedTime = 0;
+let timerInterval = null;
+let matchedCount = 0;
+let gameCards = [];
+let hasFlippedCard = false;
+let lockBoard = false;
+let firstCard = null;
+let secondCard = null;
+
 const availableCards = [
   {
     name: "frog1",
@@ -143,19 +153,7 @@ const availableCards = [
 ];
 
 const cardFrontImageSrc = "Images/lotus-flower.png";
-
-let moveCounter = 0;
-let elapsedTime = 0;
-let timerInterval = null;
-let matchedCount = 0;
-
 const gameBoard = document.querySelector(".container");
-
-let gameCards = [];
-let hasFlippedCard = false;
-let lockBoard = false;
-let firstCard = null;
-let secondCard = null;
 
 function startGame(numberOfPairs) {
   gameBoard.innerHTML = "";
