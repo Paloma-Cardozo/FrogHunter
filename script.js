@@ -1,3 +1,23 @@
+const gameBoard = document.querySelector(".container");
+const moves = document.querySelector(".moves");
+const timer = document.querySelector(".timer");
+const winner = document.querySelector(".winner");
+const startButton = document.querySelector(".button");
+
+let gameCards = [];
+let hasFlippedCard = false;
+let lockBoard = false;
+let firstCard = null;
+let secondCard = null;
+let matchedPairs = 0;
+
+const game = {
+  gameStarted: false,
+  totalMoves: 0,
+  totalTime: 0,
+  loop: null,
+};
+
 const availableCards = [
   {
     name: "frog1",
@@ -144,15 +164,17 @@ const availableCards = [
 
 const cardFrontImageSrc = "Images/lotus-flower.png";
 
-const gameBoard = document.querySelector(".container");
+function startGame() {
+  game.gameStarted = true;
+  game.loop = setInterval(() => {
+    game.totalTime++;
 
-let gameCards = [];
-let hasFlippedCard = false;
-let lockBoard = false;
-let firstCard = null;
-let secondCard = null;
+    timer.textContent = `Time: ${game.totalTime} s`;
+    moves.textContent = `Moves: ${game.totalMoves}`;
+  }, 1000);
+}
 
-function startGame(numberOfPairs) {
+function createGame(numberOfPairs) {
   gameBoard.innerHTML = "";
 
   const shuffleCards = shuffleArray([...availableCards]);
@@ -207,6 +229,12 @@ function flipCard() {
   if (lockBoard) return;
   if (this === firstCard) return;
 
+  game.totalMoves++;
+
+  if (!game.gameStarted) {
+    startGame();
+  }
+
   this.classList.add("flipped");
 
   if (!hasFlippedCard) {
@@ -232,6 +260,13 @@ function checkForMatch() {
 function disableCards() {
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
+
+  matchedPairs++;
+
+  if (matchedPairs === gameCards.length / 2) {
+    endGame();
+  }
+
   resetBoard();
 }
 
@@ -245,9 +280,32 @@ function unflipCards() {
   }, 1500);
 }
 
+function endGame() {
+  clearInterval(game.loop);
+  winner.style.display = "block";
+}
+
+function resetGame() {
+  clearInterval(game.loop);
+
+  game.gameStarted = false;
+  game.totalMoves = 0;
+  game.totalTime = 0;
+  matchedPairs = 0;
+  lockBoard = false;
+
+  moves.textContent = `Moves: 0`;
+  timer.textContent = `Time: 0 s`;
+  winner.style.display = "none";
+
+  resetBoard();
+  createGame(6);
+}
+
 function resetBoard() {
   [hasFlippedCard, lockBoard] = [false, false];
   [firstCard, secondCard] = [null, null];
 }
 
-startGame(6);
+startButton.addEventListener("click", resetGame);
+createGame(6);

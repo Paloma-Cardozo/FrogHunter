@@ -22,7 +22,6 @@ In Frog Hunter, players interact with a grid of cards showing frog-themed images
 - The timer starts from when the player clicks their first card
 - The counter shows how many times the player has revealed a card
 
-
 Display a timer should start from when the player clicks their first card.
 
 The game logic and interactions are designed to be clear, responsive, and easy to understand.
@@ -49,7 +48,7 @@ These steps are introduced progressively as the project advances through the spr
 
 ## 📂 Project Structure
 
-/frogsHunter
+/frogHunter
 │── index.html
 │── styles.css
 │── script.js
