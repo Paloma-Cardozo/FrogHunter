@@ -13,7 +13,7 @@ let matchedPairs = 0;
 
 const game = {
   gameStarted: false,
-  totalMoves: 0,
+  totalReveals: 0,
   totalTime: 0,
   loop: null,
 };
@@ -170,7 +170,6 @@ function startGame() {
     game.totalTime++;
 
     timer.textContent = `Time: ${game.totalTime} s`;
-    moves.textContent = `Moves: ${game.totalMoves}`;
   }, 1000);
 }
 
@@ -228,8 +227,10 @@ function renderGameBoard() {
 function flipCard() {
   if (lockBoard) return;
   if (this === firstCard) return;
+  if (this.classList.contains("flipped")) return;
 
-  game.totalMoves++;
+  game.totalReveals++;
+  moves.textContent = `Reveals: ${game.totalReveals}`;
 
   if (!game.gameStarted) {
     startGame();
@@ -289,12 +290,12 @@ function resetGame() {
   clearInterval(game.loop);
 
   game.gameStarted = false;
-  game.totalMoves = 0;
+  game.totalReveals = 0;
   game.totalTime = 0;
   matchedPairs = 0;
   lockBoard = false;
 
-  moves.textContent = `Moves: 0`;
+  moves.textContent = `Reveals: 0`;
   timer.textContent = `Time: 0 s`;
   winner.style.display = "none";
 
