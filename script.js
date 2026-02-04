@@ -155,6 +155,7 @@ let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard = null;
 let secondCard = null;
+let matchedCount = 0;
 
 function startGame(numberOfPairs) {
   gameBoard.innerHTML = "";
@@ -239,8 +240,22 @@ function checkForMatch() {
 }
 
 function disableCards() {
+  // mark matched so they are ignored by flipCard
+  firstCard.classList.add("matched");
+  secondCard.classList.add("matched");
+
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
+
+  // update matched count and stop timer if all pairs are matched
+  matchedCount = (typeof matchedCount === "undefined" ? 0 : matchedCount) + 2;
+  if (typeof gameCards !== "undefined" && matchedCount === gameCards.length) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    const winnerEl = document.querySelector(".winner");
+    if (winnerEl) winnerEl.style.display = "flex";
+  }
+
   resetBoard();
 }
 
@@ -289,7 +304,7 @@ document.querySelector(".button").addEventListener("click", () => {
   elapsedTime = 0;
   document.querySelector(".moves").textContent = "Moves: 0";
   document.querySelector(".timer").textContent = formatTime(0);
-  document.querySelector(".winner").style.display = "none";
+  document.querySelector(".winner").style.display = "visible";
 });
 
 startGame(6);
