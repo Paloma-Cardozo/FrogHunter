@@ -322,4 +322,26 @@ document.querySelector(".button").addEventListener("click", () => {
   if (winnerEl) winnerEl.style.display = "none";
 });
 
-startGame(6);
+//
+(function wireWinnerNewGame() {
+  const controlsStartBtn = document.querySelector(".controls .button");
+  const newGameBtn = document.getElementById("new-game-btn");
+  if (!newGameBtn) return;
+  newGameBtn.addEventListener("click", () => {
+    const winnerEl = document.querySelector(".winner");
+    if (winnerEl) {
+      winnerEl.hidden = true;
+      winnerEl.style.display = "none";
+    }
+    if (controlsStartBtn) controlsStartBtn.click();
+  });
+})();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const movesEl = document.querySelector(".moves");
+  const timerEl = document.querySelector(".timer");
+  if (movesEl) movesEl.textContent = "Moves: 0";
+  if (timerEl) timerEl.textContent = formatTime(0);
+
+  startGame(6);
+});
