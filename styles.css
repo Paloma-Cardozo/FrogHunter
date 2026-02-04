@@ -139,10 +139,25 @@ body {
 }
 
 .winner {
-  margin-bottom: 20px;
   text-align: center;
-  font-size: 40px;
-  font-weight: 700;
   color: #127439;
+  font-size: 30px;
   display: none;
+  background-color: rgba(255, 255, 255, 0.8);
+  position: fixed;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
+
+.winner-card {
+  background: #ffffff;
+  padding: 28px 34px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  min-width: 320px;
+  max-width: 90%;
+}
+

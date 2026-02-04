@@ -147,6 +147,7 @@ const cardFrontImageSrc = "Images/lotus-flower.png";
 let moveCounter = 0;
 let elapsedTime = 0;
 let timerInterval = null;
+let matchedCount = 0;
 
 const gameBoard = document.querySelector(".container");
 
@@ -155,10 +156,10 @@ let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard = null;
 let secondCard = null;
-let matchedCount = 0;
 
 function startGame(numberOfPairs) {
   gameBoard.innerHTML = "";
+  matchedCount = 0;
 
   const shuffleCards = shuffleArray([...availableCards]);
 
@@ -240,20 +241,16 @@ function checkForMatch() {
 }
 
 function disableCards() {
-  
   firstCard.classList.add("matched");
   secondCard.classList.add("matched");
 
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
 
-  
-  matchedCount = (typeof matchedCount === "undefined" ? 0 : matchedCount) + 2;
-  if (typeof gameCards !== "undefined" && matchedCount === gameCards.length) {
-    clearInterval(timerInterval);
-    timerInterval = null;
-    const winnerEl = document.querySelector(".winner");
-    if (winnerEl) winnerEl.style.display = "flex";
+  matchedCount += 2;
+  if (matchedCount === gameCards.length) {
+    stopTimer();
+    showWinner();
   }
 
   resetBoard();
@@ -298,13 +295,31 @@ function incrementMoves() {
   document.querySelector(".moves").textContent = `Moves: ${moveCounter}`;
 }
 
+function showWinner() {
+  const winnerEl = document.querySelector(".winner");
+  if (!winnerEl) return;
+
+  const movesText =
+    document.querySelector(".moves")?.textContent || `Moves: ${moveCounter}`;
+  const timerText =
+    document.querySelector(".timer")?.textContent || formatTime(elapsedTime);
+
+  const movesEl = winnerEl.querySelector(".winner-moves");
+  const timeEl = winnerEl.querySelector(".winner-time");
+  if (movesEl) movesEl.textContent = movesText;
+  if (timeEl) timeEl.textContent = timerText;
+
+  winnerEl.style.display = "flex";
+}
+
 document.querySelector(".button").addEventListener("click", () => {
   startGame(6);
   moveCounter = 0;
   elapsedTime = 0;
   document.querySelector(".moves").textContent = "Moves: 0";
   document.querySelector(".timer").textContent = formatTime(0);
-  document.querySelector(".winner").style.display = "visible";
+  const winnerEl = document.querySelector(".winner");
+  if (winnerEl) winnerEl.style.display = "none";
 });
 
 startGame(6);
