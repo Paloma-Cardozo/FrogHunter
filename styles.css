@@ -1,39 +1,102 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #ffffff;
+  font-family: "Noto Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.title,
+.subtitle {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 35px;
+  color: #127439;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+  font-weight: 400;
+  font-size: 20px;
+  color: #095327;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 40px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background-color: #e1f7b5;
+  color: #84b131;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 600;
+  font-family: "Noto Sans", sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.288);
+}
+
+.button:hover {
+  background-color: #335840;
+}
+
+.state {
+  font-size: 22px;
+  font-weight: 600;
+  color: #095327;
+}
+
 .container {
   display: grid;
-  gap: 10px;
-  grid-template-columns: auto auto auto;
+  gap: 25px;
+  grid-template-columns: repeat(3, 200px);
+  justify-content: center;
+  margin: 40px;
 }
-
-.flip-card img {
-  height: 150px;
-  width: 150px;
-}
-
-.container .flip-card {
-  height: 200px;
-  width: 200px;
-}
-
-/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 
 .flip-card {
-  background-color: transparent;
-  width: 300px;
+  width: 200px;
   height: 200px;
-  border: 1px solid #f1f1f1;
   perspective: 1000px;
+  cursor: pointer;
 }
 
 .flip-card-inner {
   position: relative;
   width: 100%;
   height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
+  transition: transform 1s;
   transform-style: preserve-3d;
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.25);  border-radius: 15px;
 }
 
-.flip-card:hover .flip-card-inner {
+.flip-card:hover .flip-card-inner:not(.flipped) {
+  transform: scale(1.05);
+}
+
+.flip-card:active .flip-card-inner:not(.flipped) {
+  transform: scale(0.95);
+}
+
+.flip-card-inner.flipped {
   transform: rotateY(180deg);
 }
 
@@ -42,17 +105,62 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
 }
 
 .flip-card-front {
-  background-color: #bbb;
-  color: black;
+  background-color: #f8ffc9;
 }
 
 .flip-card-back {
-  background-color: dodgerblue;
-  color: white;
   transform: rotateY(180deg);
 }
+
+.flip-card-front img {
+  width: 50%;
+  height: auto;
+}
+
+.flip-card-back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.frog-icon {
+  width: 50px;
+  height: 50px;
+}
+
+.winner {
+  text-align: center;
+  color: #127439;
+  font-size: 30px;
+  display: none;
+  background-color: rgba(255, 255, 255, 0.8);
+  position: fixed;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.winner-card {
+  background: #ffffff;
+  padding: 28px 34px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  min-width: 320px;
+  max-width: 90%;
+}
+
+.winner button {
+  margin: 30px auto 0;
+
+}
+
