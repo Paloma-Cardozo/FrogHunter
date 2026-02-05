@@ -63,15 +63,3 @@ This project is developed as a pair-programming exercise, emphasizing collaborat
 
 - **Paloma Cardozo**
 - **Iryna Lopatina**
-
----
-
-## 📌 Project Context & Milestones
-
-The project follows an iterative, sprint-based workflow:
-
-- **Sprint 1:** Frontend fundamentals, card interactions, layout, and animations
-- **Sprint 2:** Backend integration, API usage, and database-driven cards
-- **Sprint 3:** Complete game logic and additional features to enhance gameplay
-
-Each sprint builds on the previous one, taking the project from a simple interactive prototype to a fully playable memory game.
