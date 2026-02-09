@@ -16,13 +16,30 @@ const db = knex({
   useNullAsDefault: true,
 });
 
-app.get("/cards", async function (request, response) {
+app.get("/cards", async (request, response) => {
   try {
     const cards = await db("cards").select("*");
-    response.json(cards);
+
+    if (cards.length === 0) {
+      return response
+        .status(404)
+        .json({ error: "No cards found in the database" });
+    }
+
+    response.status(200).json(cards);
   } catch (error) {
-    response.status(500).json({ error: error.message });
+    console.error("Database error:", error.message);
+
+    response
+      .status(500)
+      .json({ error: "Failed to retrieve cards", details: error.message });
   }
+});
+
+app.use((request, response) => {
+  response.status(404).json({
+    error: "Endpoint not found",
+  });
 });
 
 const server = app.listen(3000, () => {

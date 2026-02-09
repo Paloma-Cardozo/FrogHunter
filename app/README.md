@@ -43,23 +43,26 @@ The game is built with:
 
 ## 📂 Project Structure
 
-/Final Project
-├── app/
-│ ├── Images/ # Card images
-│ ├── index.html # Game structure
-│ ├── styles.css # Styles and animations
-│ └── script.js # Game logic, fetches data from backend
-└── server/
-├── index.js # Express server
-├── database.db # SQLite database with card data
-├── package.json # Dependencies and scripts
-└── script-2.sql # SQL script to create and populate cards table
+final project/
+├── app/ # Frontend
+| |── Images/ # Card images and assets
+| │── index.html
+| │── styles.css
+| │── script.js
+└── server/ # Backend
+├── README.md # Backend documentation
+├── package.json # Node/npm dependencies and scripts
+├── package-lock.json # Locked dependency versions
+├── index.js # Express server and API routes
+├── database.db # SQLite database
+├── script-2.sql # Database schema and seed data
+└── frog-hunter-api.postman_collection.json
 
 The structure is intentionally simple, emphasizing core concepts such as DOM manipulation, state management, and API integration.
 
 ---
 
-## Notes
+## ⭐ Notes
 
 - Card images and metadata are served from the backend for better scalability.
 - Game logic is decoupled from data, so new cards can be added without modifying JS code.

@@ -1,63 +1,75 @@
-# Server
+# Frog Hunter – Backend API
 
-This folder contains the Express.js backend for the Memory Game project.
+This folder contains the backend implementation for the Frog Hunter memory game.
 
-The backend is responsible for:
+## Overview
 
-- Serving the frontend files
-- Providing an API endpoint to retrieve card data
-- Connecting to a SQLite database where the cards are stored
+- Node.js + Express server
+- SQLite database for storing card data
+- REST API used by the frontend to fetch cards
 
-## Setup
+## Available Endpoints
 
-From the `server` folder, run:
+### GET /cards
 
-```bash
-# Install dependencies
-npm install
+Returns all available cards in JSON format.
 
-# Start the server
-npm start
-```
-
-The server will run at http://localhost:3000
-
-## API Endpoints
-
-# GET /cards
-
-Returns all available cards stored in the database.
+- Status: 200 OK
+- Response: Array of card objects (id, name, image, alt, color)
 
 Example response:
 
-```
+```json
 [
   {
     "id": 1,
     "name": "frog1",
     "image": "Images/frog1.png",
-    "alt": "Smiling frog",
-    "color": "#ee76f8"
+    "alt": "Frog smiling",
+    "color": "#43bef7"
   }
 ]
 ```
 
-This endpoint is consumed by the frontend to dynamically generate the game cards.
+## API Testing
+
+The API was manually tested using Postman.
+
+- Valid endpoints return 200 OK
+- Invalid endpoints return 404 Not Found
+
+The Postman collection used for testing is included in this folder.
+
+## How to run
+
+```bash
+npm install
+npm start
+```
+
+The server runs on:
+
+```
+http://localhost:3000
+```
 
 ## Project Structure
 
 ```
 final project/
-├── app/                # Frontend
-|    |── Images/        # Card images and assets
-|    │── index.html
-|    │── styles.css
-|    │── script.js
-└── server/             # Backend
-     ├── package.json   # Node/npm dependencies and scripts
-     ├── index.js       # Express server and API routes
-     ├── database.db    # SQLite database
-     └── script-2.sql   # Database schema and seed data
+├── app/                                      # Frontend
+| |── Images/                                 # Card images and assets
+| │── index.html
+| │── styles.css
+| │── script.js
+└── server/                                   # Backend
+├── README.md                                 # Backend documentation
+├── package.json                              # Node/npm dependencies and scripts
+├── package-lock.json                         # Locked dependency versions
+├── index.js                                  # Express server and API routes
+├── database.db                               # SQLite database
+├── script-2.sql                              # Database schema and seed data
+└── frog-hunter-api.postman_collection.json
 ```
 
 ## Notes
