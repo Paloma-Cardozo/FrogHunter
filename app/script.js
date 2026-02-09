@@ -23,9 +23,14 @@ const cardFrontImageSrc = "Images/lotus-flower.png";
 async function fetchCards() {
   try {
     const response = await fetch("/cards");
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch cards");
+    }
+
     return await response.json();
   } catch (error) {
-    console.error("Failed to fetch cards:", error);
+    console.error("API error:", error);
     return [];
   }
 }
@@ -175,6 +180,10 @@ async function createGame(numberOfPairs) {
   gameBoard.replaceChildren();
 
   const cardsApi = await fetchCards();
+
+  if (cardsApi.length === 0) {
+    return;
+  }
 
   const shuffleCards = shuffleArray([...cardsApi]);
   const selectedCards = shuffleCards.slice(0, numberOfPairs);
