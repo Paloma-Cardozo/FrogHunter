@@ -48,27 +48,32 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 20px;
+  margin: 0 clamp(10px, 4vw, 20px) 20px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .button {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 20px;
-  background-color: #e1f7b5;
-  color: #84b131;
+  gap: 8px;
+  padding: 0.6em 1.2em;
+  background-color: #a3d86d;
+  color: #ffffff;
   border: none;
-  border-radius: 20px;
+  border-radius: 50px;
   cursor: pointer;
-  font-size: 22px;
-  font-weight: 600;
+  font-size: clamp(16px, 2vh, 20px);
+  font-weight: 700;
+  justify-content: center;
   font-family: "Noto Sans", sans-serif;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.288);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
 .button:hover {
-  background-color: #335840;
+  background-color: #7cb33f;
+  transform: scale(1.05);
 }
 
 .state {
@@ -80,8 +85,10 @@ body {
 .container {
   display: grid;
   gap: 2vh;
-  grid-template-columns: repeat(3, minmax(120px, 18vh));
+  grid-template-columns: repeat(4, 1fr);
   justify-content: center;
+  max-width: 90vw;
+  margin: 0 auto;
 }
 
 .flip-card {
