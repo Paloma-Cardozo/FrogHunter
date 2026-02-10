@@ -87,18 +87,16 @@ body {
 
 .container {
   display: grid;
-  gap: 2vh;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-template-columns: repeat(var(--columns), 140px);
   justify-content: center;
-  max-width: 90vw;
+  gap: 12px;
   margin: 0 auto;
 }
 
 .flip-card {
-  width: min(18vh, 18vw, 160px);
-  height: min(18vh, 18vw, 160px);
+  width: 140px;
+  aspect-ratio: 1 / 1;
   max-width: 160px;
-  max-height: 160px;
   perspective: 1000px;
   cursor: pointer;
 }

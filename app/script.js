@@ -120,7 +120,10 @@ function disableCards() {
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
 
-  if (document.querySelectorAll(".flip-card-inner.matched").length === gameCards.length) {
+  if (
+    document.querySelectorAll(".flip-card-inner.matched").length ===
+    gameCards.length
+  ) {
     stopTimer();
     showWinner();
   }
@@ -140,6 +143,18 @@ function unflipCards() {
 function resetBoard() {
   [hasFlippedCard, lockBoard] = [false, false];
   [firstCard, secondCard] = [null, null];
+}
+
+function setGridColumns(numberOfPairs = defaultNumberOfPairs) {
+  let columns;
+
+  if (numberOfPairs <= 6) columns = 4;
+  else if (numberOfPairs <= 8) columns = 4;
+  else if (numberOfPairs <= 9) columns = 3;
+  else if (numberOfPairs <= 10) columns = 5;
+  else columns = 6;
+
+  gameBoard.style.setProperty("--columns", columns);
 }
 
 function renderGameBoard() {
@@ -178,9 +193,12 @@ async function createGame(numberOfPairs) {
   gameCards = [];
   elapsedTime = 0;
   moveCounter = 0;
+
   moves.textContent = `Moves: 0`;
   timer.textContent = formatTime(0);
   stopTimer();
+
+  setGridColumns(numberOfPairs);
 
   const cardsApi = await fetchCards();
   if (cardsApi.length === 0) return;
@@ -204,9 +222,9 @@ function showWinner() {
 
   winner.style.display = "flex";
 }
-      
+
 restartButton.addEventListener("click", () => {
-createGame(defaultNumberOfPairs);
+  createGame(defaultNumberOfPairs);
 });
 
 document.addEventListener("DOMContentLoaded", () => {
