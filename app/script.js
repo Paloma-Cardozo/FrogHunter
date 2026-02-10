@@ -204,7 +204,7 @@ function showWinner() {
 
   winner.style.display = "flex";
 }
-
+      
 restartButton.addEventListener("click", () => {
 createGame(defaultNumberOfPairs);
 });
