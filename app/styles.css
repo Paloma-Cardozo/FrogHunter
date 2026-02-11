@@ -106,14 +106,14 @@ a:hover {
 
 .container {
   display: grid;
-  grid-template-columns: repeat(var(--columns), 30%);
-  justify-content: center;
-  gap: 1em;
-  margin: 0 auto;
+  grid-template-columns: repeat(var(--columns, 4), 1fr);
+  width: 100%;
+  gap: 15px;
+  margin: 0;
 }
 
 .flip-card {
-  width: 7em;
+  width: 100%;
   aspect-ratio: 1 / 1;
   perspective: 1000px;
   cursor: pointer;
