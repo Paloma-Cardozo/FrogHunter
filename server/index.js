@@ -8,28 +8,21 @@ app.use(express.json());
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 app.use(express.static(path.join(__dirname, "../app")));
 
 const db = knex({
   client: "sqlite3",
-  connection: { filename: "./database.db" },
+  connection: { filename: path.join(__dirname, "database.db") },
   useNullAsDefault: true,
 });
 
 app.get("/cards", async (request, response) => {
   try {
     const cards = await db("cards").select("*");
-
-    if (cards.length === 0) {
-      return response
-        .status(404)
-        .json({ error: "No cards found in the database" });
-    }
-
     response.status(200).json(cards);
   } catch (error) {
     console.error("Database error:", error.message);
-
     response
       .status(500)
       .json({ error: "Failed to retrieve cards", details: error.message });
