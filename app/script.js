@@ -2,7 +2,7 @@ const gameBoard = document.querySelector(".container");
 const moves = document.querySelector(".moves");
 const timer = document.querySelector(".timer");
 const winner = document.querySelector(".winner");
-const restartButton = document.querySelector(".button");
+const buttons = document.querySelectorAll(".button");
 
 const defaultNumberOfPairs = 6;
 const cardFrontImageSrc = "Images/lotus-flower.png";
@@ -19,12 +19,12 @@ let secondCard = null;
 async function fetchCards() {
   try {
     const response = await fetch("/cards");
-
     if (!response.ok) throw new Error("Failed to fetch cards");
 
     return await response.json();
   } catch (error) {
     console.error("API error:", error);
+
     return [];
   }
 }
@@ -42,26 +42,33 @@ function shuffleArray(array) {
       array[currentIndex],
     ];
   }
+
   return array;
 }
 
 function createElement(tag, className, attributes = {}) {
   const element = document.createElement(tag);
   if (className) element.className = className;
+
   Object.entries(attributes).forEach(([key, value]) => {
     element[key] = value;
   });
+
   return element;
 }
 
 function formatTime(totalSeconds) {
-  const mins = Math.floor(totalSeconds / 60);
-  const secs = totalSeconds % 60;
-  return `Time: ${mins}min ${secs}s`;
+  const mins = Math.floor(totalSeconds / 60)
+    .toString()
+    .padStart(2, "0");
+  const secs = (totalSeconds % 60).toString().padStart(2, "0");
+
+  return `Time: ${mins}:${secs}`;
 }
 
 function startTimer() {
   if (timerInterval) return;
+
   timerInterval = setInterval(() => {
     elapsedTime++;
     timer.textContent = formatTime(elapsedTime);
@@ -75,7 +82,7 @@ function stopTimer() {
 
 function incrementMoves() {
   moveCounter++;
-  moves.textContent = `Moves: ${moveCounter}`;
+  moves.textContent = `Reveals: ${moveCounter}`;
 }
 
 function revealCard(card) {
@@ -96,6 +103,7 @@ function flipCard(card) {
   if (!hasFlippedCard) {
     hasFlippedCard = true;
     firstCard = card;
+
     return;
   }
 
@@ -117,12 +125,13 @@ function disableCards() {
   firstCard.classList.add("matched");
   secondCard.classList.add("matched");
 
-  firstCard.removeEventListener("click", flipCard);
-  secondCard.removeEventListener("click", flipCard);
+  lockBoard = true;
 
   setTimeout(() => {
-    firstCard.classList.add("hidden");
-    secondCard.classList.add("hidden");
+    firstCard.style.transform = "scale(0.5) rotateY(180deg)";
+    secondCard.style.transform = "scale(0.5) rotateY(180deg)";
+    firstCard.style.opacity = "0";
+    secondCard.style.opacity = "0";
 
     if (
       document.querySelectorAll(".flip-card-inner.matched").length ===
@@ -131,15 +140,18 @@ function disableCards() {
       stopTimer();
       showWinner();
     }
+
     resetBoard();
-  }, 1500);
+  }, 1000);
 }
 
 function unflipCards() {
   lockBoard = true;
+
   setTimeout(() => {
     firstCard.classList.remove("flipped");
     secondCard.classList.remove("flipped");
+
     resetBoard();
   }, 1500);
 }
@@ -194,11 +206,13 @@ function renderGameBoard() {
 
 async function createGame(numberOfPairs) {
   gameBoard.replaceChildren();
+  winner.style.display = "none";
+
   gameCards = [];
   elapsedTime = 0;
   moveCounter = 0;
 
-  moves.textContent = `Moves: 0`;
+  moves.textContent = `Reveals: 0`;
   timer.textContent = formatTime(0);
   stopTimer();
 
@@ -209,6 +223,7 @@ async function createGame(numberOfPairs) {
 
   const shuffleCards = shuffleArray([...cardsApi]);
   const selectedCards = shuffleCards.slice(0, numberOfPairs);
+
   gameCards = shuffleArray([...selectedCards, ...selectedCards]);
 
   renderGameBoard();
@@ -224,15 +239,28 @@ function showWinner() {
   if (winnerMoves) winnerMoves.textContent = movesText;
   if (winnerTime) winnerTime.textContent = timerText;
 
-  winner.style.display = "block";
+  winner.style.display = "flex";
 }
 
-restartButton.addEventListener("click", () => {
-  createGame(defaultNumberOfPairs);
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    createGame(defaultNumberOfPairs);
+  });
+});
+
+function getCurrentPairs() {
+  if (gameCards.length > 0) {
+    return gameCards.length / 2;
+  }
+  return defaultNumberOfPairs;
+}
+
+window.addEventListener("resize", () => {
+  setGridColumns(getCurrentPairs());
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  moves.textContent = `Moves: 0`;
+  moves.textContent = `Reveals: 0`;
   timer.textContent = formatTime(0);
   createGame(defaultNumberOfPairs);
 });

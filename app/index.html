@@ -11,36 +11,50 @@
   </head>
 
   <body>
-    <h1 class="title">Frog Hunter</h1>
+    <header class="wrap">
+      <h1>Frog Hunter</h1>
+      <h2>Test Your Memory. Hunt the Frogs.</h2>
+    </header>
 
-    <h2 class="text">Test Your Memory. Hunt the Frogs.</h2>
-
-    <div class="game">
+    <main class="game wrap">
       <div class="controls">
         <button class="button">
           <span class="button-text">Restart</span>
         </button>
 
         <div class="state">
-          <span class="moves">Reveals: 0</span>
-          <span class="timer">Time: 00:00</span>
+          <div class="moves">Reveals: 0</div>
+          <div class="timer">Time: 00:00</div>
         </div>
       </div>
 
       <div class="container"></div>
 
       <div class="winner">
-        You won!
-        <p class="winner-moves"></p>
-        <p class="winner-time"></p>
-      </div>
-    </div>
+        <div class="winner-container">
+          <img
+            src="Images/celebration.png"
+            alt="Frog celebration"
+            class="frog-icon" />
 
-    <footer>
-      <div class="text">
-        <a href="https://www.flaticon.com" target="_blank" title="Flaticon"
-          >Stickers created by Stickers - Flaticon</a
-        >
+          <p class="winner-title">You won!</p>
+          <p class="winner-moves"></p>
+          <p class="winner-time"></p>
+          <button class="button">
+            <span class="button-text">New game</span>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <footer class="wrap">
+      <div>
+        <p>
+          Stickers created by
+          <a href="https://www.flaticon.com" target="_blank" title="Flaticon"
+            >Flaticon</a
+          >
+        </p>
       </div>
     </footer>
 
