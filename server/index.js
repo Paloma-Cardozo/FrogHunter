@@ -35,8 +35,9 @@ app.use((request, response) => {
   });
 });
 
-const server = app.listen(3000, () => {
-  console.log("App running on http://localhost:3000.");
+const PORT = process.env.PORT || 3000;
+const server = app.listen(PORT, () => {
+  console.log(`App running on http://localhost:${PORT}`);
 });
 
 server.on("error", (error) => {
