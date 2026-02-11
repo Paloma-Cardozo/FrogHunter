@@ -4,7 +4,7 @@ const timer = document.querySelector(".timer");
 const winner = document.querySelector(".winner");
 const restartButton = document.querySelector(".button");
 
-const defaultNumberOfPairs = 8;
+const defaultNumberOfPairs = 6;
 const cardFrontImageSrc = "Images/lotus-flower.png";
 
 let gameCards = [];

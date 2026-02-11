@@ -41,15 +41,10 @@ header {
   margin-top: 2em;
 }
 
-.title,
-.text, 
+.text,
 footer {
   text-align: center;
   margin: 10px;
-}
-
-.title {
-  font-size: 35px;
 }
 
 .text {
@@ -74,7 +69,6 @@ a:hover {
   gap: 30px;
   justify-content: flex-start;
   width: 100%;
-
 }
 
 .button {
@@ -103,14 +97,14 @@ a:hover {
 
 .state {
   font-size: 18px;
-  color: #54b999; 
+  color: #54b999;
 }
 
 .container {
   display: grid;
   grid-template-columns: repeat(var(--columns, 4), 1fr);
   width: 100%;
-  gap: 1em;
+  gap: 0.5em;
   margin: 0;
 }
 
@@ -178,7 +172,7 @@ a:hover {
   height: auto;
 }
 
-footer { 
+footer {
   padding: 1em 0;
 }
 
@@ -198,4 +192,10 @@ footer {
   font-weight: 700;
   color: #69ba2e;
   z-index: 1000;
+}
+
+@media (min-width: 1000px) {
+  .container {
+    gap: 1em;
+  }
 }
