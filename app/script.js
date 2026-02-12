@@ -3,8 +3,16 @@ const moves = document.querySelector(".moves");
 const timer = document.querySelector(".timer");
 const winner = document.querySelector(".winner");
 const buttons = document.querySelectorAll(".button");
+const levelSelect = document.querySelector(".level-select");
 
 const defaultNumberOfPairs = 6;
+const levels = {
+  easy: 6,
+  medium: 8,
+  hard: 10,
+};
+let currentLevel = "easy";
+
 const cardFrontImageSrc = "Images/lotus-flower.png";
 
 let gameCards = [];
@@ -165,7 +173,6 @@ function setGridColumns(numberOfPairs = defaultNumberOfPairs) {
   let columns;
 
   if (numberOfPairs <= 6) columns = 4;
-  else if (numberOfPairs <= 8) columns = 4;
   else if (numberOfPairs <= 9) columns = 3;
   else if (numberOfPairs <= 10) columns = 5;
   else columns = 6;
@@ -244,7 +251,7 @@ function showWinner() {
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
-    createGame(defaultNumberOfPairs);
+    createGame(levels[currentLevel]);
   });
 });
 
@@ -262,5 +269,10 @@ window.addEventListener("resize", () => {
 document.addEventListener("DOMContentLoaded", () => {
   moves.textContent = `Reveals: 0`;
   timer.textContent = formatTime(0);
-  createGame(defaultNumberOfPairs);
+  createGame(levels[currentLevel]);
+});
+
+levelSelect.addEventListener("change", (event) => {
+  currentLevel = event.target.value;
+  createGame(levels[currentLevel]);
 });
