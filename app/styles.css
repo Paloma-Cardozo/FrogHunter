@@ -63,12 +63,69 @@ a:hover {
 
 .controls {
   display: flex;
-  align-items: center;
+  flex-direction: column; 
+  align-items: flex-start;
+  width: 100%;
+  gap: 15px;
   margin-bottom: 2em;
-  flex-wrap: wrap;
-  gap: 30px;
+}
+
+.controls-main {
+  display: flex;
+  align-items: center;
   justify-content: flex-start;
   width: 100%;
+  gap: 15px;
+}
+
+.levels {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.level-btn {
+  background: #10574d;
+  border: 2px solid #3a9377;
+  color: #54b999;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.level-btn:hover {
+  border-color: #54b999;
+  color: #ffffff;
+}
+
+.level-btn.active {
+  background: #3a9377;
+  border-color: #3a9377;
+  color: #ffffff;
+}
+
+
+@media (min-width: 601px) {
+  .controls {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .controls-main {
+    width: auto;
+    gap: 30px;
+  }
+
+  .levels {
+    width: auto;
+    justify-content: flex-start;
+  }
 }
 
 .button {
