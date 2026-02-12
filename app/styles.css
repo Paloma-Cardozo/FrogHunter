@@ -124,7 +124,7 @@ a:hover {
 
   .levels {
     width: auto;
-    justify-content: flex-start;
+    justify-content: flex-end;
   }
 }
 
