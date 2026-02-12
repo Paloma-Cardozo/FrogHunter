@@ -4,6 +4,7 @@ const timer = document.querySelector(".timer");
 const winner = document.querySelector(".winner");
 const buttons = document.querySelectorAll(".button");
 const levelButtons = document.querySelectorAll(".level-btn");
+const countdownTimer = document.querySelector(".countdown-timer");
 
 const defaultNumberOfPairs = 6;
 let currentPairs = defaultNumberOfPairs;

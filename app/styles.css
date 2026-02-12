@@ -227,7 +227,7 @@ footer {
   padding: 1em 0;
 }
 
-.winner {
+.winner, .timeout {
   position: fixed;
   top: 0;
   left: 0;
@@ -243,7 +243,7 @@ footer {
   z-index: 1000;
 }
 
-.winner-container {
+.winner-container, .timeout-container {
   padding: 4rem;
   border-radius: 5px;
   border: 10px solid #10574d;
@@ -252,14 +252,14 @@ footer {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-.winner-title {
+.winner-title, .timeout-title {
   font-weight: 700;
   font-size: 2rem;
   color: #54b999;
   margin-bottom: 20px;
 }
 
-.winner button {
+.winner button, .timeout button {
   justify-self: center;
   margin-top: 25px;
 }
