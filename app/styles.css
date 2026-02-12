@@ -244,11 +244,11 @@ footer {
 }
 
 .winner-container, .timeout-container {
-  padding: 4rem;
+  padding: 3rem;
   border-radius: 5px;
   border: 10px solid #10574d;
   max-width: 600px;
-  margin: 10%;
+  margin: 5%;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
