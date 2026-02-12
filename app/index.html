@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="styles.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet" />
+      rel="stylesheet"
+    />
   </head>
 
   <body>
@@ -18,13 +19,20 @@
 
     <main class="game wrap">
       <div class="controls">
-        <button class="button">
-          <span class="button-text">Restart</span>
-        </button>
+        <div class="controls-main">
+          <button class="button">
+            <span class="button-text">Restart</span>
+          </button>
 
-        <div class="state">
-          <div class="moves">Reveals: 0</div>
-          <div class="timer">Time: 00:00</div>
+          <div class="state">
+            <div class="moves">Reveals: 0</div>
+            <div class="timer">Time: 00:00</div>
+          </div>
+        </div>
+        <div class="levels">
+          <button class="level-btn active" data-pairs="6">Level 1</button>
+          <button class="level-btn" data-pairs="8">Level 2</button>
+          <button class="level-btn" data-pairs="12">Level 3</button>
         </div>
       </div>
 
@@ -35,7 +43,8 @@
           <img
             src="Images/celebration.png"
             alt="Frog celebration"
-            class="frog-icon" />
+            class="frog-icon"
+          />
 
           <p class="winner-title">You won!</p>
           <p class="winner-moves"></p>
