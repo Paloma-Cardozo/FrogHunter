@@ -6,19 +6,26 @@ const timeout = document.querySelector(".timeout");
 const buttons = document.querySelectorAll(".button");
 const levelButtons = document.querySelectorAll(".level-btn");
 
-const defaultNumberOfPairs = 6;
-let currentPairs = defaultNumberOfPairs;
+const levelSettings = {
+  easy: { pairs: 6, time: 60, columns: 4 },
+  medium: { pairs: 8, time: 90, columns: 4 },
+  hard: { pairs: 10, time: 120, columns: 5 },
+};
+
+let defaultLevel = "easy";
+let currentLevel = defaultLevel;
 
 const cardFrontImageSrc = "Images/lotus-flower.png";
 
-const levelSettings = {
-  6: 60,
-  8: 90,
-  10: 120,
+const timerSettings = {
+  milliseconds: 1000,
+  updateFrequency: 250,
+  flipBackDelay: 1200,
+  matchedDelay: 800,
 };
 
 let gameCards = [];
-let timeLeft = levelSettings[defaultNumberOfPairs];
+let timeLeft = levelSettings[defaultLevel].time;
 let endTime = null;
 let moveCounter = 0;
 let timerInterval = null;
@@ -98,10 +105,13 @@ function showTimeout() {
 function startTimer() {
   if (timerInterval) return;
 
-  endTime = Date.now() + timeLeft * 1000;
+  endTime = Date.now() + timeLeft * timerSettings.milliseconds;
 
   timerInterval = setInterval(() => {
-    const remaining = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
+    const remaining = Math.max(
+      0,
+      Math.ceil((endTime - Date.now()) / timerSettings.milliseconds),
+    );
 
     timer.textContent = formatTime(remaining);
 
@@ -109,7 +119,7 @@ function startTimer() {
       stopTimer();
       showTimeout();
     }
-  }, 250);
+  }, timerSettings.updateFrequency);
 }
 
 function incrementMoves() {
@@ -154,7 +164,7 @@ function disableCards() {
     }
 
     resetBoard();
-  }, 800);
+  }, timerSettings.matchedDelay);
 }
 
 function showWinner() {
@@ -198,17 +208,18 @@ function unflipCards() {
     secondCard.classList.remove("flipped");
 
     resetBoard();
-  }, 1200);
+  }, timerSettings.flipBackDelay);
 }
 
-function setGridColumns(numberOfPairs = defaultNumberOfPairs) {
-  let columns;
+function setGridColumns(level = defaultLevel) {
+  const config = levelSettings[level];
 
-  if (numberOfPairs <= 8) columns = 4;
-  else if (numberOfPairs <= 10) columns = 5;
-  else columns = 6;
+  if (!config) {
+    console.warn("Invalid level. Falling back to default.");
+    return setGridColumns(defaultLevel);
+  }
 
-  gameBoard.style.setProperty("--columns", columns);
+  gameBoard.style.setProperty("--columns", config.columns);
 }
 
 function renderGameBoard() {
@@ -242,7 +253,9 @@ function renderGameBoard() {
   });
 }
 
-async function createGame(numberOfPairs) {
+async function createGame(level = defaultLevel) {
+  const config = levelSettings[level];
+
   gameBoard.replaceChildren();
 
   winner.style.display = "none";
@@ -256,21 +269,16 @@ async function createGame(numberOfPairs) {
 
   gameCards = [];
 
-  if (levelSettings[numberOfPairs] !== undefined) {
-    timeLeft = levelSettings[numberOfPairs];
-  } else {
-    timeLeft = 60;
-  }
-
+  timeLeft = config.time;
   timer.textContent = formatTime(timeLeft);
 
-  setGridColumns(numberOfPairs);
+  setGridColumns(level);
 
   const cardsApi = await fetchCards();
   if (cardsApi.length === 0) return;
 
-  const shuffleCards = shuffleArray([...cardsApi]);
-  const selectedCards = shuffleCards.slice(0, numberOfPairs);
+  const shuffledCards = shuffleArray([...cardsApi]);
+  const selectedCards = shuffledCards.slice(0, config.pairs);
   gameCards = shuffleArray([...selectedCards, ...selectedCards]);
 
   renderGameBoard();
@@ -279,24 +287,28 @@ async function createGame(numberOfPairs) {
 document.addEventListener("DOMContentLoaded", () => {
   levelButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      currentPairs = parseInt(btn.dataset.pairs, 10);
+      const selectedLevel = btn.dataset.level;
+
+      if (!levelSettings[selectedLevel]) return;
+
+      currentLevel = selectedLevel;
 
       levelButtons.forEach((level) => level.classList.remove("active"));
       btn.classList.add("active");
 
-      createGame(currentPairs);
+      createGame(currentLevel);
     });
   });
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
-      createGame(currentPairs);
+      createGame(currentLevel);
     });
   });
 
-  createGame(currentPairs);
+  createGame(currentLevel);
 });
 
 window.addEventListener("resize", () => {
-  setGridColumns(currentPairs);
+  setGridColumns(currentLevel);
 });
