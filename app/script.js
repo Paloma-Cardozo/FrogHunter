@@ -202,11 +202,8 @@ function unflipCards() {
 }
 
 function setGridColumns(numberOfPairs = defaultNumberOfPairs) {
-  let columns;
-
-  if (numberOfPairs <= 8) columns = 4;
-  else if (numberOfPairs <= 10) columns = 5;
-  else columns = 6;
+  let columns = 4;
+  if (numberOfPairs === 10) columns = 5;
 
   gameBoard.style.setProperty("--columns", columns);
 }
