@@ -296,6 +296,4 @@ document.addEventListener("DOMContentLoaded", () => {
   createGame(currentPairs);
 });
 
-window.addEventListener("resize", () => {
-  setGridColumns(currentPairs);
-});
+
