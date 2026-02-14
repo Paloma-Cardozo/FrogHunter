@@ -89,7 +89,6 @@ function stopTimer() {
 }
 
 function resetBoard() {
-  lockBoard = false;
   firstCard = null;
   secondCard = null;
 }
@@ -161,6 +160,7 @@ function disableCards() {
     }
 
     resetBoard();
+    lockBoard = false;
   }, timerSettings.matchedDelay);
 }
 
@@ -178,10 +178,14 @@ function showWinner() {
 }
 
 function flipCard(card) {
-  if (lockBoard) return;
-  if (card === firstCard) return;
-  if (card.classList.contains("flipped") || card.classList.contains("matched"))
+  if (
+    lockBoard ||
+    card === firstCard ||
+    card.classList.contains("flipped") ||
+    card.classList.contains("matched")
+  ) {
     return;
+  }
 
   revealCard(card);
 
@@ -205,6 +209,7 @@ function unflipCards() {
     secondCard.classList.remove("flipped");
 
     resetBoard();
+    lockBoard = false;
   }, timerSettings.flipBackDelay);
 }
 
@@ -263,6 +268,7 @@ async function createGame(level = defaultLevel) {
 
   stopTimer();
   resetBoard();
+  lockBoard = true;
 
   moveCounter = 0;
   moves.textContent = `Reveals: 0`;
@@ -280,6 +286,7 @@ async function createGame(level = defaultLevel) {
 
   renderGameBoard();
   hideModals();
+  lockBoard = false;
 }
 
 function updateActiveLevel(selectedBtn) {
