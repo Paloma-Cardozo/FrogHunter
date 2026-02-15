@@ -39,15 +39,15 @@ The game logic is intentionally kept clear and predictable, focusing on state ma
 
 ## 🖼️ Screenshot of Gameplay
 
-<img src="app/Images/Screenshot.png" width="150" alt="Frog Hunter gameplay">
+<img src="app/Images/Screenshot.png" width="450" alt="Frog Hunter gameplay">
 
 ### 🖼️ Winner Modal
 
-![Winner modal](app/Images/Winner-modal.png)
+<img src="app/Images/Winner-modal.png" width="450" alt="Winner modal">
 
 ### 🖼️ Timeout Modal
 
-![Timeout modal](app/Images/Timeout-modal.png)
+<img src="app/Images/Timeout-modal.png" width="450" alt="Timeout modal">
 
 ---
 
@@ -148,7 +148,7 @@ The deployed version mirrors the local environment and includes:
 
 A QR code is included below for quick mobile access.
 
-![QR Code](app/Images/QR.jpeg)
+<img src="app/Images/QR.jpeg" width="450" alt="QR Code">
 
 ---
 
