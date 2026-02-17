@@ -14,7 +14,7 @@ This repository reflects that progression and the decisions made along the way.
 
 In Frog Hunter, players interact with a grid of frog-themed cards.
 
-Core mechanics:
+### Core mechanics:
 
 - Cards start face down
 - Players can reveal two cards at a time
@@ -23,9 +23,31 @@ Core mechanics:
 - Not matching cards flip back after a short delay
 - The game ends when all matching pairs are found
 - A timer starts when the first card is revealed
-- A counter tracks how many cards reveals the player has made (a reveal is not the same as a click)
+- A counter tracks how many card reveals the player has made (a reveal is not the same as a click)
+- Players can choose between multiple difficulty levels (easy, medium, hard)
+
+### Future enhancements planned:
+
+- Sound effects for flipping cards, matching pairs, and game end
+- Scoring system: points per match, difficulty and time modifiers, and best score tracking
+- Player name input: associate scores with a player
+- Database-backed leaderboard: store top scores, filter by difficulty, and display top 10
 
 The game logic is intentionally kept clear and predictable, focusing on state management, timing, and user feedback rather than complex visual effects.
+
+---
+
+## 🖼️ Screenshot of Gameplay
+
+![Frog Hunter gameplay](app/Images/Screenshot.png)
+
+### 🖼️ Winner Modal
+
+![Winner modal](app/Images/Winner-modal.png)
+
+### 🖼️ Timeout Modal
+
+![Timeout modal](app/Images/Timeout-modal.png)
 
 ---
 
@@ -73,6 +95,7 @@ This separation keeps responsibilities clear:
 - **npm** — dependency management and scripts
 - **Postman** — API testing during development
 - **VS Code** — development environment
+- **Render** — cloud deployment platform
 
 ---
 
@@ -110,6 +133,25 @@ Valid endpoints return `200 OK`; invalid routes return `404 Not Found`.
 
 ---
 
+## 🌍 Live Deployment
+
+The project is deployed and publicly accessible at:
+
+👉 https://froghunter.onrender.com/
+
+The deployed version mirrors the local environment and includes:
+
+- Fully functional frontend–backend communication
+- Responsive layout
+- Difficulty levels and timer
+- Winner and timeout modals
+
+A QR code is included below for quick mobile access.
+
+![QR Code](app/Images/QR.jpeg)
+
+---
+
 ## ▶️ How to Run the Project
 
 ### Backend
@@ -138,11 +180,11 @@ The game will fetch card data from the running backend server.
 ```
 frog hunter/
 ├── postman/                                            # Postman tests, collection and API evidence
-|   ├── collection/                                     # Exported Postman collection
-│   ├── screenshots/                                    # Evidence of API responses and test results
-│   │   ├── body-preview.png
-│   │   └── test-results.png
-│   └── postman-tests.md                                # Documentation of Postman test scripts
+  ├── collection/                                       # Exported Postman collection
+│ ├── screenshots/                                      # Evidence of API responses and test results
+│ │   ├── body-preview.png
+│ │   └── test-results.png
+│ └── postman-tests.md                                  # Documentation of Postman test scripts
 |
 ├── app/                                                # Frontend application
 | |── Images/                                           # Card images and visual assets
@@ -173,10 +215,16 @@ The structure is intentionally simple to keep the focus on:
 - Card data is no longer hardcoded in the frontend.
 - New cards can be added by updating the database without changing game logic.
 - The backend remains minimal by design.
-- The frontend grid and cards scale with screen size; minor UI refinements are possible for smaller devices.
+- A custom favicon was added to improve branding and browser tab identification.
+- The layout was developed using a mobile-first approach.
+- Base styles target small screens by default.
+- Larger screen refinements are applied using min-width media queries (600px and above).
+- This ensures optimal performance and usability on mobile devices, which represent the majority of web traffic.
 - Image assets are credited in the UI.
 - Matched cards are now visually hidden with a smooth animation, providing clear feedback when a pair is found.
 - The 'matched' state ensures cards are both non-interactive and visually removed without affecting game logic or grid layout.
+- Difficulty levels and countdown timer are implemented to enhance challenge.
+- Future planned features include sound effects, scoring system, player name input, and leaderboard
 
 ---
 
